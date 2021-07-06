@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:30:23 by root              #+#    #+#             */
-/*   Updated: 2021/07/04 01:03:10 by root             ###   ########.fr       */
+/*   Updated: 2021/07/06 14:41:51 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,41 +14,41 @@
 
 void	philo_sleep(t_philo *philo)
 {
-	printf("%lu ms %d \x1b[30mis sleeping\x1b[0m\n", ft_get_elapsed_time_ms(philo->start_time), philo->id);
+	print_message_sleep(philo);
 	usleep(philo->arg->time_to_sleep * 1000);
 }
 
 void	philo_eat_odd(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->mutex);
-	printf("%lu ms %d \x1b[36mhas taken a fork\x1b[0m\n", ft_get_elapsed_time_ms(philo->start_time), philo->id);
-	pthread_mutex_lock(&philo->next->mutex);
-
+	pthread_mutex_lock(&philo->mutex_of_fork);
+	print_message_take_fork(philo);
+	pthread_mutex_lock(&philo->next->mutex_of_fork);
+	print_message_take_fork(philo);
 	philo->eating = 1;
-	printf("%lu ms %d \x1b[32mis eating eating\x1b[0m\n", ft_get_elapsed_time_ms(philo->start_time), philo->id);
-	usleep(philo->arg->time_to_eat * 1000);
+	print_message_eat(philo);
 	gettimeofday(&philo->cycle_time, NULL);
+	usleep(philo->arg->time_to_eat * 1000);
 	philo->eating = 0;
-	pthread_mutex_unlock(&philo->mutex);
-	pthread_mutex_unlock(&philo->next->mutex);
+	pthread_mutex_unlock(&philo->mutex_of_fork);
+	pthread_mutex_unlock(&philo->next->mutex_of_fork);
 }
 
 void	philo_eat_even(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->next->mutex);
-	printf("%lu ms %d \x1b[36mhas taken a fork\x1b[0m\n", ft_get_elapsed_time_ms(philo->start_time), philo->id);
-	pthread_mutex_lock(&philo->mutex);
-
+	pthread_mutex_lock(&philo->next->mutex_of_fork);
+	print_message_take_fork(philo);
+	pthread_mutex_lock(&philo->mutex_of_fork);
+	print_message_take_fork(philo);
 	philo->eating = 1;
-	printf("%lu ms %d \x1b[32mis eating eating\x1b[0m\n", ft_get_elapsed_time_ms(philo->start_time), philo->id);
-	usleep(philo->arg->time_to_eat * 1000);
+	print_message_eat(philo);
 	gettimeofday(&philo->cycle_time, NULL);
-	pthread_mutex_unlock(&philo->next->mutex);
-	pthread_mutex_unlock(&philo->mutex);
+	usleep(philo->arg->time_to_eat * 1000);
 	philo->eating = 0;
+	pthread_mutex_unlock(&philo->next->mutex_of_fork);
+	pthread_mutex_unlock(&philo->mutex_of_fork);
 }
 
 void	philo_think(t_philo *philo)
 {
-	printf("%lu ms %d \x1b[35mis thinking\x1b[0m\n", ft_get_elapsed_time_ms(philo->start_time), philo->id);
+	print_message_think(philo);
 }

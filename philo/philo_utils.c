@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 18:56:44 by root              #+#    #+#             */
-/*   Updated: 2021/07/05 00:18:40 by root             ###   ########.fr       */
+/*   Updated: 2021/07/06 14:44:47 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	ft_iseven(int id)
 {
-	return(id % 2);
+	return (id % 2);
 }
 
 int	ft_isvalidarg(t_arguments *arg)
 {
 	return (arg->num_of_philo < 0
-			|| arg->time_to_die < 0
-			|| arg->time_to_eat < 0
-			|| arg->time_to_sleep < 0);
+		|| arg->time_to_die < 0
+		|| arg->time_to_eat < 0
+		|| arg->time_to_sleep < 0);
 }
 
 unsigned long	ft_get_elapsed_time_ms(struct timeval *start_time)
@@ -36,7 +36,7 @@ unsigned long	ft_get_elapsed_time_ms(struct timeval *start_time)
 	return (dst);
 }
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	size_t		i;
 	int			sign;
@@ -60,4 +60,11 @@ int		ft_atoi(const char *str)
 		i++;
 	}
 	return (dst * sign);
+}
+
+int	ft_is_dead(t_philo *philo)
+{
+	return (!philo->eating
+		&& ((ft_get_elapsed_time_ms(&philo->cycle_time))
+			> (unsigned long) philo->arg->time_to_die));
 }

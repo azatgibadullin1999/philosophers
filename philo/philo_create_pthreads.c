@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_create_pthreads.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 19:35:46 by root              #+#    #+#             */
-/*   Updated: 2021/07/04 23:14:30 by root             ###   ########.fr       */
+/*   Updated: 2021/07/06 14:43:58 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,14 @@ static int	create_pthreads(t_philo *philo)
 	i = 0;
 	while (i < (size_t) philo->arg->num_of_philo)
 	{
-		pthread_create(&philo->thread, NULL, philo_action, (void *)philo);
-		pthread_create(&philo->thread, NULL, philo_action_watcher, (void *)philo);
+		pthread_create(&philo->thread_philo,
+			NULL,
+			philo_action,
+			(void *)philo);
+		pthread_create(&philo->thread_watcher,
+			NULL,
+			philo_action_watcher,
+			(void *)philo);
 		philo = philo->next;
 		i++;
 	}
@@ -34,10 +40,15 @@ static int	wait_pthreads(t_philo *philo)
 	i = 0;
 	while (i < (size_t) philo->arg->num_of_philo)
 	{
-		pthread_join(philo->thread, NULL);
-		philo = philo->next;
-		i++;
+		usleep(20);
+		if (*philo->is_dead)
+		{
+			pthread_detach(philo->thread_philo);
+			philo = philo->next;
+			i++;
+		}
 	}
+	print_message_die(philo);
 	return (0);
 }
 

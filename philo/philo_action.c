@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_action.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 20:00:37 by root              #+#    #+#             */
-/*   Updated: 2021/07/04 23:13:36 by root             ###   ########.fr       */
+/*   Updated: 2021/07/06 14:21:00 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 void	*philo_action_watcher(void *argument)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)argument;
-	while (1)
+	while (!*philo->is_dead)
 	{
-		if (!philo->eating && (ft_get_elapsed_time_ms(&philo->cycle_time) > (unsigned long) philo->arg->time_to_die))
+		usleep(20);
+		pthread_mutex_lock(philo->mutex_of_dead);
+		if (!*philo->is_dead && philo->cycle_is_start && ft_is_dead(philo))
 		{
-			printf("%lu ms %d \x1b[31mis dead\x1b[0m\n", ft_get_elapsed_time_ms(philo->start_time), philo->id);
-			exit(0);
+			*philo->is_dead = 1;
+			break ;
 		}
+		pthread_mutex_unlock(philo->mutex_of_dead);
 	}
+	return (NULL);
 }
 
 void	*philo_action(void *argument)
@@ -33,7 +37,8 @@ void	*philo_action(void *argument)
 
 	philo = (t_philo *)argument;
 	gettimeofday(&philo->cycle_time, NULL);
-	while (1)
+	philo->cycle_is_start = 1;
+	while (!*philo->is_dead)
 	{
 		philo->philo_eat(philo);
 		philo->philo_think(philo);

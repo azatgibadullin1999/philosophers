@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:11:28 by root              #+#    #+#             */
-/*   Updated: 2021/07/03 14:25:11 by root             ###   ########.fr       */
+/*   Updated: 2021/07/06 14:44:10 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	struct timeval	time;
-	t_philo			*philo;
-	t_arguments		arg;
-	
+	t_common_structs	init;
+	t_philo				*philo;
+
 	if (argc != 5)
 		return (ERROR);
-	if (prj_philosophers_init(argv, &philo, &arg, &time))
+	if (prj_philosophers_init(argv, &philo, &init))
 		return (ERROR);
 	philo_pthreads(philo);
 	return (0);

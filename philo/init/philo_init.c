@@ -3,23 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:22:25 by root              #+#    #+#             */
-/*   Updated: 2021/07/04 01:08:07 by root             ###   ########.fr       */
+/*   Updated: 2021/07/06 13:40:36 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-int	philos_init(t_arguments *arg, t_philo**philos, struct timeval *time)
+t_philo	*philos_init(t_philo **philos, t_common_structs *init)
 {
-	if (philos_create(arg, philos))
-		return (ERROR);
-	if (philos_struct_fill(arg, philos, time))
-		return (ERROR);
-	philos_struct_compound(arg, philos);
-	return (0);
+	t_philo	*dst;
+
+	philos = malloc(sizeof(t_philo *) * init->arg->num_of_philo);
+	if (!philos)
+		return (NULL);
+	if (philos_create(philos, init))
+		return (NULL);
+	if (philos_struct_fill(philos, init))
+		return (NULL);
+	philos_struct_compound(philos, init);
+	dst = *philos;
+	free(philos);
+	return (dst);
 }
 
 int	arg_init(char **argv, t_arguments *arg)
@@ -31,11 +38,33 @@ int	arg_init(char **argv, t_arguments *arg)
 	return (ft_isvalidarg(arg));
 }
 
-int	prj_philosophers_init(char **argv, t_philo **philo, t_arguments *arg, struct timeval *time)
+int	ft_was_allocated(t_common_structs *init)
 {
-	if (arg_init(argv, arg))
+	return (!init->arg
+		|| !init->is_dead
+		|| !init->start_time
+		|| !init->mutex_of_dead
+		|| !init->mutex_of_message);
+}
+
+int	common_struct_init(t_common_structs *init)
+{
+	init->arg = malloc(sizeof(t_arguments));
+	init->is_dead = malloc(sizeof(int));
+	init->start_time = malloc(sizeof(struct timeval));
+	init->mutex_of_dead = malloc(sizeof(pthread_mutex_t));
+	init->mutex_of_message = malloc(sizeof(pthread_mutex_t));
+	return (ft_was_allocated(init));
+}
+
+int	prj_philosophers_init(char **argv, t_philo **philo, t_common_structs *init)
+{
+	if (common_struct_init(init))
 		return (ERROR);
-	if (philos_init(arg, philo, time))
+	if (arg_init(argv, init->arg))
+		return (ERROR);
+	*philo = philos_init(philo, init);
+	if (!*philo)
 		return (ERROR);
 	return (0);
 }
