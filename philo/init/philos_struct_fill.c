@@ -6,11 +6,11 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 12:52:13 by root              #+#    #+#             */
-/*   Updated: 2021/07/06 13:44:39 by larlena          ###   ########.fr       */
+/*   Updated: 2021/07/06 19:20:37 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../includes/philo.h"
 
 int	mutex_destroy(t_philo **philos, size_t mutex_num)
 {
@@ -30,9 +30,9 @@ int	mutex_destroy(t_philo **philos, size_t mutex_num)
 int	philos_struct_fill_func(t_philo *philo)
 {
 	if (philo->id % 2)
-		philo->philo_eat = philo_eat_odd;
-	else
 		philo->philo_eat = philo_eat_even;
+	else
+		philo->philo_eat = philo_eat_odd;
 	philo->philo_sleep = philo_sleep;
 	philo->philo_think = philo_think;
 	return (0);

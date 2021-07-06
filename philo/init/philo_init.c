@@ -6,11 +6,11 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:22:25 by root              #+#    #+#             */
-/*   Updated: 2021/07/06 13:40:36 by larlena          ###   ########.fr       */
+/*   Updated: 2021/07/06 15:44:07 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../includes/philo.h"
 
 t_philo	*philos_init(t_philo **philos, t_common_structs *init)
 {

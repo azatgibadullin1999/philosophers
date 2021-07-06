@@ -1,15 +1,16 @@
 NAME = philo
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -lpthread
-SRCS =	./philo_main.c\
-		./philo_utils.c\
-		./philo_action.c\
-		./actions.c\
-		./philo_create_pthreads.c\
+CFLAGS = -Wall -Wextra -Werror -g
+SRCS =	./main/philo_main.c\
+		./main/philo_create_pthreads.c\
+		./main/philo_utils.c\
+		./threads/philo_action.c\
+		./threads/actions.c\
+		./threads/message.c\
 		./init/philo_init.c\
-		./init/philo_create.c\
-		./init/philo_struct_fill.c\
-		./init/philo_struct_compound.c
+		./init/philos_create.c\
+		./init/philos_struct_fill.c\
+		./init/philos_struct_compound.c
 
 HEAD = philo.h
 OFILE = $(SRCS:.c=.o)
@@ -17,7 +18,7 @@ OFILE = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OFILE)
-	$(CC) -o $(NAME) $(OFILE)
+	$(CC) -o $(NAME) $(OFILE) -lpthread
 
 clean: 
 	rm -f $(OFILE)

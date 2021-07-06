@@ -6,11 +6,11 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 12:52:08 by root              #+#    #+#             */
-/*   Updated: 2021/07/05 15:22:23 by larlena          ###   ########.fr       */
+/*   Updated: 2021/07/06 15:44:07 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../philo.h"
+#include "../includes/philo.h"
 
 int	philos_destroy(t_philo **philos, size_t	philos_num)
 {
