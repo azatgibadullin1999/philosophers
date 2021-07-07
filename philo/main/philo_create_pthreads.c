@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 19:35:46 by root              #+#    #+#             */
-/*   Updated: 2021/07/06 19:21:52 by larlena          ###   ########.fr       */
+/*   Updated: 2021/07/07 11:56:07 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int	create_pthreads(t_philo *philo)
 	i = 0;
 	while (i < (size_t) philo->arg->num_of_philo)
 	{
-		my_usleep(20);
 		pthread_create(&philo->thread_philo,
 			NULL,
 			philo_action,

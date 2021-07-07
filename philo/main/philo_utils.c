@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 18:56:44 by root              #+#    #+#             */
-/*   Updated: 2021/07/06 18:20:52 by larlena          ###   ########.fr       */
+/*   Updated: 2021/07/07 11:57:50 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,4 @@ int	ft_is_dead(t_philo *philo)
 	return (!philo->eating
 		&& ((ft_get_elapsed_time_ms(&philo->cycle_time))
 			> (unsigned long) philo->arg->time_to_die));
-}
-
-void		my_usleep(unsigned long time)
-{
-	struct timeval tmp1;
-	struct timeval tmp2;
-
-	gettimeofday(&tmp1, NULL);
-	gettimeofday(&tmp2, NULL);
-	while ((unsigned long)(tmp2.tv_sec * 1000000 + tmp2.tv_usec - tmp1.tv_sec * 1000000 -
-					tmp1.tv_usec) <= time)
-	{
-		usleep(10);
-		gettimeofday(&tmp2, NULL);
-	}
 }

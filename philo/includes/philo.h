@@ -6,7 +6,7 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:12:26 by root              #+#    #+#             */
-/*   Updated: 2021/07/06 18:18:45 by larlena          ###   ########.fr       */
+/*   Updated: 2021/07/07 12:00:49 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,13 @@ typedef struct s_philo
 	struct s_philo	*next;
 }					t_philo;
 
-void			my_usleep(unsigned long time);
-
 //			philo_utils.c
 unsigned long	ft_get_elapsed_time_ms(struct timeval *start_time);
 int				ft_iseven(int id);
 int				ft_isvalidarg(t_arguments *arg);
 int				ft_atoi(const char *str);
 int				ft_is_dead(t_philo *philo);
+void			philosophers_clear(t_philo *philo);
 
 //			philo_create_pthreads.c
 int				philo_pthreads(t_philo*philo);
@@ -80,6 +79,7 @@ void			philo_sleep(t_philo *philo);
 void			philo_eat_even(t_philo *philo);
 void			philo_eat_odd(t_philo *philo);
 void			philo_think(t_philo *philo);
+void			my_usleep(unsigned long time);
 
 //			massage.c
 void			print_message_take_fork(t_philo *philo);

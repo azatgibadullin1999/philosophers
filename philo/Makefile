@@ -2,8 +2,9 @@ NAME = philo
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 SRCS =	./main/philo_main.c\
-		./main/philo_create_pthreads.c\
+		./main/philo_clear.c\
 		./main/philo_utils.c\
+		./main/philo_create_pthreads.c\
 		./threads/philo_action.c\
 		./threads/actions.c\
 		./threads/message.c\
