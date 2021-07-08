@@ -2,11 +2,12 @@ NAME = philo
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 SRCS =	./main/philo_main.c\
-		./main/philo_create_pthreads.c\
+		./main/philo_clear.c\
 		./main/philo_utils.c\
-		./threads/philo_action.c\
-		./threads/actions.c\
+		./main/philo_create_pthreads.c\
 		./threads/message.c\
+		./threads/actions.c\
+		./threads/philo_action.c\
 		./init/philo_init.c\
 		./init/philos_create.c\
 		./init/philos_struct_fill.c\

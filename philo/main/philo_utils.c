@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 18:56:44 by root              #+#    #+#             */
-/*   Updated: 2021/07/06 18:20:52 by larlena          ###   ########.fr       */
+/*   Updated: 2021/07/06 21:13:28 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_is_dead(t_philo *philo)
 {
 	return (!philo->eating
 		&& ((ft_get_elapsed_time_ms(&philo->cycle_time))
-			> (unsigned long) philo->arg->time_to_die));
+			> (unsigned long) philo->arg->time_to_die + 1));
 }
 
 void		my_usleep(unsigned long time)

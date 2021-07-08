@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:12:26 by root              #+#    #+#             */
-/*   Updated: 2021/07/06 18:18:45 by larlena          ###   ########.fr       */
+/*   Updated: 2021/07/06 21:11:39 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int				ft_iseven(int id);
 int				ft_isvalidarg(t_arguments *arg);
 int				ft_atoi(const char *str);
 int				ft_is_dead(t_philo *philo);
+void			philosophers_clear(t_philo *philo);
 
 //			philo_create_pthreads.c
 int				philo_pthreads(t_philo*philo);
