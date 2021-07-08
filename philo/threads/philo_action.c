@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 20:00:37 by root              #+#    #+#             */
-/*   Updated: 2021/07/06 21:12:59 by root             ###   ########.fr       */
+/*   Updated: 2021/07/08 14:38:59 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	*philo_action_watcher(void *argument)
 	philo = (t_philo *)argument;
 	while (1)
 	{
-		my_usleep(20);
 		pthread_mutex_lock(philo->mutex_of_dead);
 		if (!*philo->is_dead && philo->cycle_is_start && ft_is_dead(philo))
 			break ;

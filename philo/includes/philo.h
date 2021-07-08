@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:12:26 by root              #+#    #+#             */
-/*   Updated: 2021/07/06 21:11:39 by root             ###   ########.fr       */
+/*   Updated: 2021/07/08 14:40:24 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ typedef struct s_philo
 	struct s_philo	*next;
 }					t_philo;
 
-void			my_usleep(unsigned long time);
-
 //			philo_utils.c
 unsigned long	ft_get_elapsed_time_ms(struct timeval *start_time);
 int				ft_iseven(int id);
@@ -81,6 +79,7 @@ void			philo_sleep(t_philo *philo);
 void			philo_eat_even(t_philo *philo);
 void			philo_eat_odd(t_philo *philo);
 void			philo_think(t_philo *philo);
+void			my_usleep(unsigned long time);
 
 //			massage.c
 void			print_message_take_fork(t_philo *philo);

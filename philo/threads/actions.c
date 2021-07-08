@@ -6,11 +6,21 @@
 /*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 16:30:23 by root              #+#    #+#             */
-/*   Updated: 2021/07/06 18:20:26 by larlena          ###   ########.fr       */
+/*   Updated: 2021/07/07 11:58:03 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	my_usleep(unsigned long time)
+{
+	struct timeval	start_sleep;
+
+	time = time / 1000;
+	gettimeofday(&start_sleep, NULL);
+	while (ft_get_elapsed_time_ms(&start_sleep) < time)
+		usleep(10);
+}
 
 void	philo_sleep(t_philo *philo)
 {

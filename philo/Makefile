@@ -5,8 +5,9 @@ SRCS =	./main/philo_main.c\
 		./main/philo_clear.c\
 		./main/philo_utils.c\
 		./main/philo_create_pthreads.c\
-		./threads/message.c\
+		./threads/philo_action.c\
 		./threads/actions.c\
+		./threads/message.c\
 		./threads/philo_action.c\
 		./init/philo_init.c\
 		./init/philos_create.c\
