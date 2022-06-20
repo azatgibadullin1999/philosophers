@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 19:22:25 by root              #+#    #+#             */
-/*   Updated: 2021/07/09 20:45:05 by root             ###   ########.fr       */
+/*   Updated: 2021/07/17 14:37:54 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int	common_struct_init(t_common_structs *init)
 	return (ft_was_allocated(init));
 }
 
-int	prj_philosophers_init(int argc, char **argv, t_philo **philo, t_common_structs *init)
+int	prj_philosophers_init(int argc, char **argv,
+		t_philo **philo, t_common_structs *init)
 {
 	if (common_struct_init(init))
 		return (ERROR);

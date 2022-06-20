@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_action.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: larlena <larlena@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/26 20:00:37 by root              #+#    #+#             */
-/*   Updated: 2021/07/09 20:47:19 by root             ###   ########.fr       */
+/*   Updated: 2021/07/17 14:58:08 by larlena          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ int	end_of_philo_is_time(t_philo *philo)
 	if (philo->num_of_eat == philo->arg->num_of_eat)
 		*philo->is_finished += 1;
 	pthread_mutex_unlock(philo->mutex_of_check_condition);
-	return (!(*philo->is_finished == philo->arg->num_of_philo) && end_of_philo_is_die(philo));
+	return (!(*philo->is_finished == philo->arg->num_of_philo)
+		&& end_of_philo_is_die(philo));
 }
 
 void	*philo_action_waiter(void *argument)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *) argument;
 	while (1)
@@ -46,10 +47,15 @@ void	*philo_action_watcher(void *argument)
 	{
 		pthread_mutex_lock(philo->mutex_of_dead);
 		if (!*philo->is_dead && philo->cycle_is_start && ft_is_dead(philo))
+		{
+			if (*philo->is_finished == philo->arg->num_of_philo)
+				NULL ;
+			else
+				print_message_die(philo);
 			break ;
+		}
 		pthread_mutex_unlock(philo->mutex_of_dead);
 	}
-	print_message_die(philo);
 	return (NULL);
 }
 
